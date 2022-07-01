@@ -1,13 +1,26 @@
 import logo from './logo.svg';
 import './App.css';
 
+import axios from "axios";
+import React, { useEffect } from 'react';
+
+const baseURL = "https://paracetamol-node.herokuapp.com/users/api/server";
+
 function App() {
+  const [message, setMessage] = React.useState(null);
+
+  useEffect(() => {
+    axios.get(baseURL).then((response) => {
+      setMessage(response.data);
+    });
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          { message || 'Hello'}
         </p>
         <a
           className="App-link"
